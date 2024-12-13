@@ -1,0 +1,54 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+    id        String    @id @default(uuid())
+    email     String    @unique
+    mobile    String    @unique
+    password  String
+    isOnline  Boolean   @default(false)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    
+    // Messages
+    sentMessages     Message[] @relation("SentMessages")
+    receivedMessages Message[] @relation("ReceivedMessages")
+     contacts    Contact[] @relation("UserContacts")
+     contactedBy Contact[] @relation("ContactOfUser")
+     name      String    @default("User") 
+  }
+  
+model Message {
+  id          String   @id @default(uuid())
+  content     String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id])
+  senderId    String
+  recipient   User     @relation("ReceivedMessages", fields: [recipientId], references: [id])
+  recipientId String
+  read       Boolean  @default(false)
+
+}
+model Contact {
+  id          String   @id @default(cuid())
+  userId      String   // The user who owns this contact
+  contactId   String   // The contact's user ID
+  user        User     @relation("UserContacts", fields: [userId], references: [id])
+  contact     User     @relation("ContactOfUser", fields: [contactId], references: [id])
+  lastMessage   String?   
+  lastMessageAt DateTime?
+  createdAt   DateTime @default(now())
+  
+  @@unique([userId, contactId])
+}
