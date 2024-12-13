@@ -35,6 +35,7 @@ npm install
 
 * Create a PostgreSQL database.
 * rename the .example.env file to `.env` then update the file with your database credentials and optionally the jwt secret.
+navigate to the src folder then run the below command 
 * Run the following commands:
 
 ```bash
