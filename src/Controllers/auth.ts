@@ -40,7 +40,6 @@ export class AuthController {
           isOnline: false
         }
       });
-      console.log(user)
 
       const token = jwt.sign(
         { userId: user.id, email: user.email },

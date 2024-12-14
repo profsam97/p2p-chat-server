@@ -40,7 +40,7 @@ export class SocketService {
             socket.emit('offline-messages', storedMessages);
             offlineMessages.delete(userId);
           }
-
+          console.log('works')
           // Broadcast online status
           this.io.emit('user-status-change', { userId, isOnline: true });
         } catch (error) {
@@ -86,6 +86,7 @@ export class SocketService {
           const recipientSocket = this.io.sockets.adapter.rooms.get(`user:${recipientId}`);
 
           if (recipientSocket) {
+            console.log('online')
             // Send message directly to recipient
             this.io.to(`user:${recipientId}`).emit('new-message', message);
 

@@ -38,7 +38,6 @@ export class UserController {
           isOnline: true
         }
       });
-      console.log(users)
       return res.json(users);
     } catch (error) {
       console.error('Search users error:', error);
