@@ -21,7 +21,7 @@ This is a real-time chat application built with Node.js, TypeScript, Prisma, and
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/chatapp.git
+git clone https://github.com/profsam97/p2p-chat-server.git
 ```
 
 2. Install dependencies:
